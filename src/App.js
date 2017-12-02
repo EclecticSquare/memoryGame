@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import MemoryCard from './MemoryCard.js'
+import MemoryCardBack from './MemoryCard.js'
 
 class App extends Component {
   render() {
@@ -11,32 +11,30 @@ class App extends Component {
           <h4 className="App-subtitle">Match Cards To Win</h4>
         </header>
         <div>
-          <MemoryCard />
-          <MemoryCard />
-          <MemoryCard />
-          <MemoryCard />
+          <MemoryCardBack />
+          <MemoryCardBack />
+          <MemoryCardBack />
+          <MemoryCardBack />
         </div>
         <div>
-          <MemoryCard />
-          <MemoryCard />
-          <MemoryCard />
-          <MemoryCard />
+          <MemoryCardBack />
+          <MemoryCardBack />
+          <MemoryCardBack />
+          <MemoryCardBack />
         </div>
         <div>
-          <MemoryCard />
-          <MemoryCard />
-          <MemoryCard />
-          <MemoryCard />
+          <MemoryCardBack />
+          <MemoryCardBack />
+          <MemoryCardBack />
+          <MemoryCardBack />
         </div>
         <div>
-          <MemoryCard />
-          <MemoryCard />
-          <MemoryCard />
-          <MemoryCard />
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+          <MemoryCardBack />
+          <MemoryCardBack />
+          <MemoryCardBack />
+          <MemoryCardBack />
+       </div>
+      
       </div>
     );
   }
