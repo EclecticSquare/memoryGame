@@ -3,6 +3,10 @@ import './App.css';
 import MemoryCardBack from './MemoryCard.js'
 
 class App extends Component {
+  // Game Logic
+
+
+  //Renders the physical gameboard
   render() {
     return (
       <div className="App">
