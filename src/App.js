@@ -24,20 +24,7 @@ function shuffle(a) {
   }
 }
 
-function pickCard(cardIndex) {
-  if(!this.state.deck[cardIndex].isFlipped){
-    return;
 
-  }
-  var cardToFlip = {...this.state.deck[cardIndex]}
-    cardToFlip.isFlipped = true
-    this.setState({deck:newDeck, pickedCards:newPickedCards})
-
-    var newPickedCards = this.state.pickedCards.concat(cardIndex);
-    var newDeck = this.state.deck.map( (card, index) => {
-      return cardToFlip
-    });
-}
 
 
 
@@ -52,6 +39,30 @@ class App extends Component {
         pickedCards: []
 
       }
+  }
+
+  pickCard(cardIndex) {
+    if(this.state.deck[cardIndex].isFlipped){
+      return;
+  
+    }
+    var cardToFlip = {...this.state.deck[cardIndex]}
+      cardToFlip.isFlipped = true
+        
+
+      var newPickedCards = this.state.pickedCards.concat(cardIndex);
+      var newDeck = this.state.deck.map( (card, index) => {
+        if(cardIndex ==index) {
+          return cardToFlip
+        }
+        return card
+      });
+      if(newPickedCards.length == 2) {
+        var card1Index = newPickedCards[0];
+        var card2Index = newPickedCards[1];
+          if(newDeck[card1Index].symbol != newDeck[card2Index].symbol) {
+      }
+      this.setState({deck:newDeck, pickedCards:newPickedCards})
   }
 
   //Renders the physical gameboard
