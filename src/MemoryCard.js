@@ -29,7 +29,7 @@ class MemoryCard extends Component {
                     </div>
 
                     <div className='MemoryCardFront'>
-                        ∆
+                        {this.props.symbol}
                     </div>
                 </div>
             </div>
