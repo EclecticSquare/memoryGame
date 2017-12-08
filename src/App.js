@@ -4,11 +4,15 @@ import MemoryCard from './MemoryCard.js'
 
 
 function generateDeck() {
+  //return an array of card objects
   var symbols = ["√", "π", "∂","œ","÷","†","ø","ß"];
   var deck = [];
 
   for(var i=0;i<16;i++){
-    deck.push({isFlipped:false, symbol:symbols[i%8]})
+    deck.push({
+      isFlipped:false, 
+      symbol:symbols[i%8]
+    });
   }
   shuffle(deck)
   return deck
@@ -42,14 +46,18 @@ class App extends Component {
   }
 
   pickCard(cardIndex) {
-    if(this.state.deck[cardIndex].isFlipped){
-      return;
+  //   if(this.state.deck[cardIndex].isFlipped){
+  //     return;
   
-    }
-    var cardToFlip = {...this.state.deck[cardIndex]}
-      cardToFlip.isFlipped = true
-        
+  //   }
+    var cardToFlip = {...this.state.deck[cardIndex]};
+      if(cardToFlip.isFlipped){
+        return;
+      }
+      
+      cardToFlip.isFlipped = true;
 
+      //copy our picked cards array and also add cardIndex to the end
       var newPickedCards = this.state.pickedCards.concat(cardIndex);
       var newDeck = this.state.deck.map( (card, index) => {
         if(cardIndex ==index) {
@@ -60,17 +68,69 @@ class App extends Component {
       if(newPickedCards.length == 2) {
         var card1Index = newPickedCards[0];
         var card2Index = newPickedCards[1];
-          if(newDeck[card1Index].symbol != newDeck[card2Index].symbol) {
+
+        var card1 = newDeck[card1Index];
+        var card2 = newDeck[card2Index];
+
+          if(card1.symbol != card2.symbol) {
+            setTimeout(this.unflipCards.bind(this, card1Index, card2Index), 1000);
+          }
+
+              newPickedCards = [];
+    
+          }
+        this.setState({
+          deck:newDeck, 
+          pickedCards:newPickedCards
+        })
+    }
+
+
+    unflipCards(card1Index, card2Index) {
+        var card1 = {...this.state.deck[card1Index]};
+        var card2 = {...this.state.deck[card2Index]};
+        
+        card1.isFlipped = false
+        card2.isFlipped = false
+
+          var newDeck = this.state.deck.map((card, index)     => {
+            if(index == card1Index)  {
+            return card1;
+          }
+            if(index == card2Index) {
+              return card2;
+            }
+          return card;
+        });
+        this.setState({
+          deck: newDeck
+        
+        });
       }
-      this.setState({deck:newDeck, pickedCards:newPickedCards})
-  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   //Renders the physical gameboard
   render() {
 
    var cardsJSX = this.state.deck.map( (card,index) => {
-      return <MemoryCard symbol={card.symbol} isFlipped={card.isFlipped} key={index} pickCard={this.pickCard.bind(this, index)} />
-   })
+      return <MemoryCard symbol={card.symbol} 
+                        isFlipped={card.isFlipped} 
+                        key={index}
+                        pickCard={this.pickCard.bind(this, index)}
+                        />
+   });
 
     return (
       <div className="App">
@@ -98,5 +158,6 @@ class App extends Component {
     );
   }
 }
+
 
 export default App;
