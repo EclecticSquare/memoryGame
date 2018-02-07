@@ -1,3 +1,3 @@
 # memoryGame
 
-Practice using React Routes and Links and working with components create multi-page applications.
+Practice using React Routes and Links and working with components to create multi-page applications.
